@@ -41,7 +41,7 @@ export class TaskService {
   }
 
   delete(id:number): Observable<any>{
-    return this.httpClient.put(this.apiURL + `/task/${id}`,
+    return this.httpClient.delete(this.apiURL + `/task/${id}`,
     {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
