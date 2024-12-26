@@ -14,6 +14,7 @@ import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { CreateComponent } from '../create/create.component';
 
 @Component({
   selector: 'app-list',
@@ -42,6 +43,10 @@ export class ListComponent {
   ) { }
 
   ngOnInit(): void {
+    this.loadTable();
+  }
+
+  loadTable(): void {
     this.taskService.getAll().subscribe((data: Task[]) => {
       this.tasks = data;
       console.log(data);
@@ -49,7 +54,15 @@ export class ListComponent {
   }
 
   addTask(): void {
-
+    const dialogRef = this.dialog.open(CreateComponent, {
+      width: '600px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadTable();
+      }
+    });
   }
 
   editTask(id: number): void {
@@ -59,7 +72,7 @@ export class ListComponent {
   deleteTask(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: { message: 'Are you sure you want to proceed?' }
+      data: { message: 'Are you sure you want to delete this task?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

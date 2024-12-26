@@ -22,7 +22,7 @@ export class TaskService {
       pipe(catchError(this.errorHandler));
   }
 
-  create(task: Task): Observable<any> {
+  create(task: any): Observable<any> {
     return this.httpClient.post(this.apiURL + '/task', JSON.stringify(task),
       {
         headers: new HttpHeaders({
