@@ -18,7 +18,9 @@ public class TaskManagementApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/task/**").allowedOrigins("http://localhost:4200");
+				registry.addMapping("/task/**")
+						.allowedOrigins("http://localhost:4200")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
 			}
 		};
 	}
