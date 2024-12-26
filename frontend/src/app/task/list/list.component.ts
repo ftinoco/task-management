@@ -54,19 +54,24 @@ export class ListComponent {
   }
 
   addTask(): void {
+    this.showForm(null);
+  }
+
+  editTask(id: number): void {
+    this.showForm(id);
+  }
+
+  showForm(id: number | null) : void {
     const dialogRef = this.dialog.open(CreateComponent, {
       width: '600px',
-      disableClose: true
+      disableClose: true,
+      data: id
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loadTable();
       }
     });
-  }
-
-  editTask(id: number): void {
-    console.log(id);
   }
 
   deleteTask(id: number): void {

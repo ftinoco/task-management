@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
-import { Task } from './task';
+import { catchError, Observable, throwError } from 'rxjs'; 
 
 @Injectable({
   providedIn: 'root'
@@ -31,22 +30,23 @@ export class TaskService {
       }).pipe(catchError(this.errorHandler));
   }
 
-  update(task: Task): Observable<any>{
+  update(task: any): Observable<any> {
+    console.log(JSON.stringify(task));
     return this.httpClient.put(this.apiURL + '/task', JSON.stringify(task),
-    {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    }).pipe(catchError(this.errorHandler));
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(catchError(this.errorHandler));
   }
 
-  delete(id:number): Observable<any>{
+  delete(id: number): Observable<any> {
     return this.httpClient.delete(this.apiURL + `/task/${id}`,
-    {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    }).pipe(catchError(this.errorHandler));
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error: any) {
